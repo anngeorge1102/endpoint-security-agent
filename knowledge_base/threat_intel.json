@@ -1,0 +1,156 @@
+[
+  {
+    "id": "T1490",
+    "type": "mitre_technique",
+    "name": "Inhibit System Recovery",
+    "description": "Adversaries may delete or remove built-in operating system data and turn off services designed to aid in the recovery of a corrupted system. This includes shadow copies, backup catalogs, and recovery tools. Commonly used by ransomware groups including Conti, LockBit, REvil, and BlackCat before encrypting files.",
+    "indicators": ["vssadmin.exe delete shadows", "wbadmin delete catalog", "bcdedit /set recoveryenabled no"],
+    "threat_groups": ["Conti", "LockBit", "REvil", "BlackCat"],
+    "severity": "Critical"
+  },
+  {
+    "id": "T1059.001",
+    "type": "mitre_technique",
+    "name": "PowerShell Execution",
+    "description": "Adversaries abuse PowerShell commands and scripts for execution. PowerShell is a powerful interactive command-line interface and scripting environment included in the Windows operating system. Encoded commands, download cradles, and hidden windows are common evasion techniques.",
+    "indicators": ["powershell -enc", "powershell -w hidden", "IEX", "DownloadString", "DownloadFile"],
+    "threat_groups": ["APT29", "FIN7", "Lazarus Group"],
+    "severity": "High"
+  },
+  {
+    "id": "T1003.001",
+    "type": "mitre_technique",
+    "name": "LSASS Memory Dumping",
+    "description": "Adversaries may attempt to access credential material stored in LSASS process memory. Credentials gathered from LSASS memory can be used for lateral movement and privilege escalation. Tools like Mimikatz are commonly used for this technique.",
+    "indicators": ["mimikatz", "sekurlsa::logonpasswords", "lsass memory access", "procdump lsass"],
+    "threat_groups": ["APT28", "APT29", "Lazarus Group", "FIN6"],
+    "severity": "Critical"
+  },
+  {
+    "id": "T1486",
+    "type": "mitre_technique",
+    "name": "Data Encrypted for Impact",
+    "description": "Adversaries may encrypt data on target systems to interrupt availability to system and network resources. They can attempt to render stored data inaccessible by encrypting files or data on local and remote drives. Ransomware groups commonly create ransom notes after encryption.",
+    "indicators": ["README_DECRYPT", ".locked extension", ".encrypted extension", "encrypt_all.exe", "ransom note"],
+    "threat_groups": ["Conti", "LockBit", "REvil", "DarkSide"],
+    "severity": "Critical"
+  },
+  {
+    "id": "T1548.002",
+    "type": "mitre_technique",
+    "name": "UAC Bypass",
+    "description": "Adversaries may bypass UAC mechanisms to elevate process privileges. Common techniques include using fodhelper.exe, eventvwr.exe, and other trusted Windows binaries that auto-elevate. This allows attackers to gain administrative access without triggering UAC prompts.",
+    "indicators": ["fodhelper.exe", "eventvwr.exe", "sdclt.exe", "registry modification mscfile"],
+    "threat_groups": ["APT28", "FIN7", "Carbanak"],
+    "severity": "High"
+  },
+  {
+    "id": "T1021.002",
+    "type": "mitre_technique",
+    "name": "SMB Lateral Movement",
+    "description": "Adversaries may use Valid Accounts to interact with a remote network share using Server Message Block. Tools like PsExec use SMB to copy and execute payloads on remote systems. Hardcoded credentials in commands are a strong indicator of compromise.",
+    "indicators": ["psexec", "net use", "IPC$", "admin$", "SMB port 445"],
+    "threat_groups": ["APT29", "Lazarus Group", "FIN6"],
+    "severity": "High"
+  },
+  {
+    "id": "T1558.001",
+    "type": "mitre_technique",
+    "name": "Golden Ticket Attack",
+    "description": "Adversaries who have the KRBTGT account password hash may forge Kerberos ticket-granting tickets, known as Golden Tickets. These forged tickets can be used to access any resource in the Active Directory domain. This indicates full domain compromise.",
+    "indicators": ["krbtgt", "golden ticket", "forged kerberos", "mimikatz kerberos::golden"],
+    "threat_groups": ["APT29", "APT28", "Lazarus Group"],
+    "severity": "Critical"
+  },
+  {
+    "id": "T1566.001",
+    "type": "mitre_technique",
+    "name": "Spearphishing Attachment",
+    "description": "Adversaries may send spearphishing emails with malicious attachments to gain access. Common file types include macro-enabled Office documents, PDFs with embedded scripts, and archive files containing executables.",
+    "indicators": ["winword.exe spawning powershell", "outlook.exe child process", ".docm", ".xlsm", "macro execution"],
+    "threat_groups": ["APT28", "APT29", "FIN7", "Lazarus Group"],
+    "severity": "High"
+  },
+  {
+    "id": "T1218.005",
+    "type": "mitre_technique",
+    "name": "Mshta Execution",
+    "description": "Adversaries may abuse mshta.exe to proxy execution of malicious .hta files and Javascript or VBscript. Mshta.exe is a trusted Windows binary that can bypass application control solutions. Remote HTA files are commonly used in drive-by attacks.",
+    "indicators": ["mshta.exe", ".hta file", "mshta http://", "mshta https://"],
+    "threat_groups": ["APT32", "Kimsuky", "Lazarus Group"],
+    "severity": "High"
+  },
+  {
+    "id": "T1070.001",
+    "type": "mitre_technique",
+    "name": "Clear Windows Event Logs",
+    "description": "Adversaries may clear Windows Event Logs to hide the evidence of an intrusion. This is a common anti-forensic technique used after ransomware deployment. Clearing Security, System, and Application logs removes evidence of attacker activity.",
+    "indicators": ["wevtutil cl", "wevtutil clear-log", "Clear-EventLog"],
+    "threat_groups": ["Conti", "LockBit", "APT28"],
+    "severity": "Critical"
+  },
+  {
+    "id": "C2-001",
+    "type": "malicious_ip",
+    "ip": "185.220.101.47",
+    "description": "Known Tor exit node and ransomware C2 server. Associated with multiple ransomware campaigns including Conti and LockBit operations. Any communication with this IP should be treated as critical.",
+    "threat_groups": ["Conti", "LockBit"],
+    "severity": "Critical"
+  },
+  {
+    "id": "C2-002",
+    "type": "malicious_ip",
+    "ip": "91.108.56.130",
+    "description": "Known malicious infrastructure associated with ransomware distribution. Used as command and control server for multiple campaigns targeting enterprise environments.",
+    "threat_groups": ["Unknown APT"],
+    "severity": "High"
+  },
+  {
+    "id": "C2-003",
+    "type": "malicious_domain",
+    "domain": "cdn-update-service.ru",
+    "description": "Malicious domain masquerading as a CDN update service. Used as C2 infrastructure in ransomware campaigns. The .ru TLD combined with CDN naming is a common attacker technique.",
+    "threat_groups": ["Conti"],
+    "severity": "Critical"
+  },
+  {
+    "id": "C2-004",
+    "type": "malicious_domain",
+    "domain": "malicious-cdn.net",
+    "description": "Known malware distribution domain. Used to host malicious HTA files and payloads for drive-by download attacks.",
+    "threat_groups": ["Unknown"],
+    "severity": "High"
+  },
+  {
+    "id": "C2-005",
+    "type": "malicious_domain",
+    "domain": "evil-docs.net",
+    "description": "Known phishing and malware distribution domain. Hosts malicious document droppers and loaders targeting enterprise users.",
+    "threat_groups": ["FIN7"],
+    "severity": "High"
+  },
+  {
+    "id": "FP-001",
+    "type": "false_positive_pattern",
+    "name": "Windows Update Traffic",
+    "description": "Legitimate Windows Update service communicating with Microsoft servers. svchost.exe connecting to windowsupdate.microsoft.com is normal system behavior and should be suppressed.",
+    "indicators": ["svchost.exe", "windowsupdate.microsoft.com", "wuauserv"],
+    "severity": "Low"
+  },
+  {
+    "id": "FP-002",
+    "type": "false_positive_pattern",
+    "name": "SCCM Software Deployment",
+    "description": "Microsoft System Center Configuration Manager deploying software to endpoints. Silent MSI installations from SCCM agent are legitimate IT operations.",
+    "indicators": ["sccm_agent.exe", "msiexec /quiet", "internal-sccm"],
+    "severity": "Low"
+  },
+  {
+    "id": "FP-003",
+    "type": "false_positive_pattern",
+    "name": "Developer Build Scripts",
+    "description": "Developers running PowerShell build scripts from VS Code or other IDEs. ExecutionPolicy Bypass from development environments targeting internal CI/CD systems is normal.",
+    "indicators": ["vscode.exe", "build.ps1", "internal-devops", "pytest"],
+    "severity": "Low"
+  }
+]
